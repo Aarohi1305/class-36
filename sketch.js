@@ -1,18 +1,15 @@
-var hypnoticBall, database;
-var position;
-
+var database;
+var form, player, game;
+var canvas;
+var bacImg;
+var gameState = 0;
+var playerCount; 
 
 function setup(){
+ 
   database = firebase.database();
-  console.log(database);
-  createCanvas(500,500);
+  canvas = createCanvas(400,400);
 
-  hypnoticBall = createSprite(250,250,10,10);
-  hypnoticBall.shapeColor = "red";
-
-
-  var hypnoticBallPosition = database.ref('ball/position');
-  hypnoticBallPosition.on("value", readPosition, showError);
 }
 
 function draw(){
@@ -34,10 +31,10 @@ function draw(){
   
 }
 
-function writePosition(x,y){
+function writePosition(x1,y1){
   database.ref('ball/position').set({
-    'x': position.x + x ,
-    'y': position.y + y
+    'x': position.x + x1 ,
+    'y': position.y + y1
   })
 }
 
